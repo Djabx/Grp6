@@ -254,22 +254,6 @@ public class JXMapViewer extends JPanel implements DesignMode {
 							g.drawImage(getLoadingImage(), ox + imageX, oy + imageY, null);
 						}
 					}
-					if (isDrawTileBorders())
-					{
-
-						g.setColor(Color.black);
-						g.drawRect(ox, oy, size, size);
-						g.drawRect(ox + size / 2 - 5, oy + size / 2 - 5, 10, 10);
-						g.setColor(Color.white);
-						g.drawRect(ox + 1, oy + 1, size, size);
-
-						String text = itpx + ", " + itpy + ", " + getZoom();
-						g.setColor(Color.BLACK);
-						g.drawString(text, ox + 10, oy + 30);
-						g.drawString(text, ox + 10 + 2, oy + 30 + 2);
-						g.setColor(Color.WHITE);
-						g.drawString(text, ox + 10 + 1, oy + 30 + 1);
-					}
 				}
 			}
 		}
