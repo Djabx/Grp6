@@ -26,7 +26,7 @@ import javax.swing.SingleSelectionModel;
  *
  * @author Drew Noakes https://drewnoakes.com
  */
-public class SampleUsage
+public class MetadataExtractor
 {
     /**
      * Executes the sample usage program.
