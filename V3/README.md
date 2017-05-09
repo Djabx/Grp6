@@ -1,7 +1,8 @@
 # Project
 Projet Java L2 INFO
 
-Dependency a ajouté à maven :
+Dependencys a ajouter à maven :
+
 <dependency>
 	<groupId>org.jxmapviewer</groupId>
 	<artifactId>jxmapviewer2</artifactId>
