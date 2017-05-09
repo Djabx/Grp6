@@ -21,8 +21,10 @@ import javax.swing.SingleSelectionModel;
 
 public class MetadataExtractor
 {
+    
     public static void main(String[] args)
     {
+        
         File file = new File("C:/Users/Lycéen/Desktop/test.jpg");
         System.out.println(file);
         System.out.println(" ");
