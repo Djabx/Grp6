@@ -19,20 +19,8 @@ import java.util.Arrays;
 
 import javax.swing.SingleSelectionModel;
 
-/**
- * Showcases the most popular ways of using the metadata-extractor library.
- * <p>
- * For more information, see the project wiki: https://github.com/drewnoakes/metadata-extractor/wiki/GettingStarted
- *
- * @author Drew Noakes https://drewnoakes.com
- */
 public class MetadataExtractor
 {
-    /**
-     * Executes the sample usage program.
-     *
-     * @param args command line parameters
-     */
     public static void main(String[] args)
     {
         File file = new File("C:/Users/Lycéen/Desktop/test.jpg");
