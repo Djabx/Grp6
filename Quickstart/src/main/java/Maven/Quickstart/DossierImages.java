@@ -9,7 +9,7 @@ import com.drew.imaging.jpeg.JpegProcessingException;
 
 public class DossierImages {
 	
-	public static ArrayList<Image> listeImages;
+	public ArrayList<Image> listeImages;
 	public static final String nomDossier = "LesImages";
 	public static final File fichiersDossier = new File(nomDossier);
 
