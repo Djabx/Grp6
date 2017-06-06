@@ -12,5 +12,11 @@ Dependencys a ajouter à maven :
 <dependency>
   <groupId>com.drewnoakes</groupId>
   <artifactId>metadata-extractor</artifactId>
-  <version>2.10.1</version>
+  <version>2.9.1</version>
+</dependency>
+
+<dependency>
+  <groupId>commons-io</groupId>
+  <artifactId>commons-io</artifactId>
+  <version>2.5</version>
 </dependency>
