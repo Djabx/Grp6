@@ -58,16 +58,37 @@ public class ImageDansJScrollGauche extends JFrame{
 				
 				int indice = (((JLabelModif) e.getSource()).ind);
 
+				
 				_carte.centrerImag(new GeoPosition(imagList.get(indice).Latitude,
 						imagList.get(indice).Longitude));
-				System.out.println("Latittude : "+imagList.get(indice).Latitude);
-				System.out.println("Longitude : "+imagList.get(indice).Longitude);
-				System.out.println("Nom : "+imagList.get(indice).nom);
 				
 				poids= imagList.get(indice).taille*Math.pow(2, -20);
 				java.text.DecimalFormat df = new java.text.DecimalFormat("0.###");
+				
+				JFrame fenetre = new JFrame();
+				fenetre.setSize(210,150);
+				fenetre.setLocation(60, 50);
+				fenetre.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+				fenetre.setTitle("Info");
+				fenetre.setVisible(true);
+				
+				/*JLabel Infolat = new JLabel("Latittude : "+imagList.get(indice_jlabel).Latittude);
+				JLabel Infolon = new JLabel("Longitude :"+imagList.get(indice_jlabel).Longitude);
+				JLabel Infonom = new JLabel("Nom :"+imagList.get(indice_jlabel).nom);
+				JLabel Infopoids = new JLabel("Poids :"+df.format(poids)+" Mo");*/
+				
+				JLabel Info = new JLabel();
+				Info.setText("<html>Latitude : "+imagList.get(indice).Latitude+"<br>"+"Longitude : "+imagList.get(indice).Longitude+"<br>"+
+						"Nom : "+imagList.get(indice).nom+"<br>"+"Poids : "+df.format(poids)+" Mo"+"</html>");
+				fenetre.add(Info);
+				
+				
+				/*System.out.println("Latittude : "+imagList.get(indice).Latitude);
+				System.out.println("Longitude : "+imagList.get(indice).Longitude);
+				System.out.println("Nom : "+imagList.get(indice).nom);
+				
 				System.out.println("Poids : "+df.format(poids)+" Mo");
-				System.out.println("");
+				System.out.println("");*/
 			}
 			
 		});
