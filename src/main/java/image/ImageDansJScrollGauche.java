@@ -7,8 +7,6 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;

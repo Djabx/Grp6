@@ -1,7 +1,6 @@
 package carte;
 
 import java.awt.Component;
-import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
