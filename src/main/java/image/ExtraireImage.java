@@ -96,6 +96,8 @@ public class ExtraireImage {
 			System.out.println("Attention Erreur");
 		} catch (IOException e) {
 			System.out.println("Attention votre image n'a pas de coordonnées GPS");
+		}catch (java.lang.ClassCastException e){
+			System.out.println("Attention Erreur 3");
 		}
 		// conversion//
 		lat = lat.replace(",", ".");
