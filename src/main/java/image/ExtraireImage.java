@@ -1,4 +1,4 @@
-package image;
+﻿package image;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,7 +24,7 @@ public class ExtraireImage {
 		File repertoire = null;
 		try {
 			repertoire = new File(".").getCanonicalFile();
-			System.out.println("R�pertoire courant : " + repertoire);
+			System.out.println("Répertoire courant : " + repertoire);
 		} catch (IOException e) {
 			System.out.println("Erreur");
 		}
@@ -95,12 +95,12 @@ public class ExtraireImage {
 		} catch (ImageProcessingException e) {
 			System.out.println("Attention Erreur");
 		} catch (IOException e) {
-			System.out.println("Attention votre image n'a pas de coordonn�es GPS");
+			System.out.println("Attention votre image n'a pas de coordonnées GPS");
 		}
 		// conversion//
 		lat = lat.replace(",", ".");
 
-		String[] tableau = lat.split("�");
+		String[] tableau = lat.split("°");
 		tableau[1] = tableau[1].substring(1, tableau[1].length());
 
 		String[] tableau2 = tableau[1].split("'");
@@ -128,12 +128,12 @@ public class ExtraireImage {
 		} catch (ImageProcessingException e) {
 			System.out.println("Attention Erreur");
 		} catch (IOException e) {
-			System.out.println("Attention votre image n'as pas de coordonn�es GPS");
+			System.out.println("Attention votre image n'as pas de coordonnées GPS");
 		}
 		// conversion//
 		lon = lon.replace(",", ".");
 
-		String[] tableau = lon.split("�");
+		String[] tableau = lon.split("°");
 		tableau[1] = tableau[1].substring(1, tableau[1].length());
 
 		String[] tableau2 = tableau[1].split("'");

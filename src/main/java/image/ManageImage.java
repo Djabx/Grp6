@@ -31,4 +31,19 @@ public class ManageImage {
 			e.printStackTrace();
 		}
 	}
+	public static void BaseDonneeFermee(ArrayList<Image> ListImage){
+		File dos;
+		try {
+			dos = new File("Dossier Image").getCanonicalFile();
+			String[] list = dos.list();
+			for(int i=0; i < list.length; i++){
+				File f = new File(DIR_FILE,list[i]).getCanonicalFile();
+				Image image = new Image(f, ExtraireImage.getLatittude(f),ExtraireImage.getLongitude(f));
+				if(!(ListImage.contains(image))){
+					f.delete();
+				}
+			}
+		}catch (IOException e){
+			e.printStackTrace();
+		}
 }
