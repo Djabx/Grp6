@@ -11,8 +11,8 @@ public class Image {
 	public long taille;
 	public ArrayList<String> commentaire;
 	public String nom;
-	
-	public Image(File f, float lat, float lon){
+
+	public Image(File f, float lat, float lon) {
 		this.file = f;
 		this.Latitude = lat;
 		this.Longitude = lon;
@@ -20,8 +20,9 @@ public class Image {
 		this.taille = f.length();
 		this.nom = f.getName();
 	}
+
 	public void addCom(String com2) throws NoStringException {
-		if (com2 == ""){
+		if (com2 == "") {
 			throw new NoStringException();
 		} else {
 			this.commentaire.add(com2);

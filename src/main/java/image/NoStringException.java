@@ -1,9 +1,9 @@
 package image;
 
-public class NoStringException extends Exception{
-	
+public class NoStringException extends Exception {
+
 	void NoStringexception() {
-		System.out.println("Pas d'entrées");
+		System.out.println("Pas d'entrï¿½es");
 	}
 
 }
