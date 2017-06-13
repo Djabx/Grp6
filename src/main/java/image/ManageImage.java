@@ -47,3 +47,4 @@ public class ManageImage {
 			e.printStackTrace();
 		}
 }
+}
