@@ -1,6 +1,7 @@
 package carte;
 
 import java.awt.Component;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,28 +14,41 @@ import org.jxmapviewer.viewer.GeoPosition;
 import image.ExtraireImage;
 import image.Image;
 import image.ManageImage;
-import waypoint.PainterModif;
+import projet.ClickSouris;
+import carte.PainterModif;
 import waypoint.WaypointDefautModif;
 
 public class Carte {
 	private JXMapKit carte;
-	private Set<WaypointDefautModif> waypoint;
-
-	private Component clickonMap;
-	private ManageImage manageImage;
-	private Image derniereimage;
-	private ArrayList<Image> ImageWaypointResultat;
-	private ArrayList<WaypointDefautModif> WaypointClicResultat;
+	private Set<waypoint.WaypointDefautModif> waypoint; // waypoint qui seront
+														// dessinés
 
 	private PainterModif painter;
+	private ManageImage manageImage; // Liste qui contient les images
+	private Component clickonMap;
+	public ArrayList<Image> ImageWaypointResultat;
+	private ArrayList<waypoint.WaypointDefautModif> WaypointClicResultat;
+	private Image derniereimage;
 
-	public Carte() {
+	public Carte() { // instanciation des données nécessaire à la map
 		this.manageImage = new ManageImage();
+		this.waypoint = new HashSet<waypoint.WaypointDefautModif>();
+		this.WaypointClicResultat = new ArrayList<waypoint.WaypointDefautModif>();
+
 		this.carte = new JXMapKit();
 		this.carte.setDefaultProvider(JXMapKit.DefaultProviders.OpenStreetMaps);
 
-		this.waypoint = new HashSet<WaypointDefautModif>();
-		this.WaypointClicResultat = new ArrayList<WaypointDefautModif>();
+		Component clickonmap = new ClickSouris(this, this.WaypointClicResultat); // Ecoute
+																					// et
+																					// récupère
+																					// les
+																					// coordonnées
+																					// du
+																					// click
+		this.carte.getMainMap().addMouseListener((MouseListener) clickonmap); // Avec
+																				// la
+																				// class
+																				// CLickSouris
 
 		this.painter = new PainterModif();
 		this.carte.getMainMap().setOverlayPainter(painter);
@@ -42,21 +56,23 @@ public class Carte {
 
 	}
 
-	public JXMapKit getMap() { // Obtention de la carte
+	public JXMapKit getMap() { // Récupération de la carte
 		return this.carte;
 	}
 
 	public void paint() {
-		this.painter.setWaypoint(waypoint);
+		this.painter.setWaypoint(waypoint); // donne la liste des waypoints
 
 		this.carte.getMainMap().repaint();
 	}
 
-	public ManageImage getManageImage() {
+	public ManageImage getManageImage() { // Récupération de la liste de
+											// manageImage
 		return this.manageImage;
 	}
 
-	public ArrayList<Image> getImagList() {
+	public ArrayList<Image> getImagList() { // Récupération de cette liste
+											// d'images
 		return this.manageImage.imagList;
 	}
 
@@ -74,36 +90,47 @@ public class Carte {
 		return this.ImageWaypointResultat;
 	}
 
-	public void ajoutWaypoint(double coordx, double coordy, int key) {
-		this.waypoint.add(new WaypointDefautModif(coordx, coordy, key));
+	public void ajoutWaypoint(double coordx, double coordy, int key) { // Ajoute
+																		// un
+																		// waypoint
+																		// au
+		this.waypoint.add(new WaypointDefautModif(coordx, coordy, key)); // set
+																			// de
+																			// waypoints
 		this.paint();
 	}
 
-	public void ajoutWaypoint(GeoPosition point, int key) {
-		this.waypoint.add(new WaypointDefautModif(point, key));
+	public void ajoutWaypoint(GeoPosition point, int key) { // Ajoute un
+															// waypoint au
+		this.waypoint.add(new WaypointDefautModif(point, key)); // set de
+																// waypoints
 		this.paint();
 	}
 
 	public void AjoutImage() throws IOException {
 
-		Image newimag = ExtraireImage.LoadImage();
-		this.manageImage.imagList.add(newimag);
+		Image newimag = ExtraireImage.LoadImage(); // Ouvrir la fenêtre de
+													// recherche d'image
+		this.manageImage.imagList.add(newimag); // Ajoute cette image à notre
+												// Liste
 		this.derniereimage = newimag;
 
+		// Ajoute un waypoint avec sa latitude et sa longitude
 		this.ajoutWaypoint(newimag.Latitude, newimag.Longitude, this.manageImage.imagList.size() - 1);
 	}
 
-	public Image getLastImag() {
+	public Image getLastImag() { // Récupération de la dernière image
 		return this.derniereimage;
 	}
 
-	public void centrerImag(GeoPosition pos) {
+	public void centrerImag(GeoPosition pos) { // Centre à la position choisie
 		this.carte.getMainMap().setCenterPosition(pos);
 
 		this.paint();
 	}
 
-	public void initialisation() {
+	public void initialisation() { // Permet d'afficher les waypoints d'images
+									// déjà chargées dans le dossier
 		if (!this.manageImage.imagList.isEmpty()) {
 			for (int i = 0; i < this.manageImage.imagList.size(); i++) {
 				this.waypoint.add(new WaypointDefautModif(this.manageImage.imagList.get(i).Latitude,
@@ -113,7 +140,11 @@ public class Carte {
 		this.paint();
 	}
 
-	public Collection<? extends WaypointDefautModif> RecupSetWaypoint() {
+	public Collection<? extends WaypointDefautModif> RecupSetWaypoint() { // Récupération
+																			// du
+																			// set
+																			// de
+																			// waypoints
 		return this.waypoint;
 	}
 

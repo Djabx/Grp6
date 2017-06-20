@@ -20,20 +20,19 @@ import org.jxmapviewer.viewer.GeoPosition;
 import carte.Carte;
 import projet.JLabelModif;
 
-public class ImageDansJScrollGauche extends JFrame {
+public class ImageDansJScrollGauche extends JFrame { // Création du JScollPane
 
 	public static double poids;
 
 	public static JScrollPane method(final ArrayList<image.Image> imagList, final Carte _carte) {
 
-		// cr�ation d'un GridBagContraints pour afficher seulement sur une
-		// colonne
+		// GridBacContains pour afficher que sur une colonne
 		GridBagConstraints c = new GridBagConstraints();
 		c.weightx = 0.0;
 		c.gridx = 0;
 		c.insets = new Insets(1, 0, 1, 0);
 
-		// cr�ation du JPanel qui contiendra les label
+		// Jpanel qui contiendra les labels
 		JPanel panel1 = new JPanel(new GridBagLayout());
 		panel1.setLayout(new GridBagLayout());
 
@@ -44,9 +43,9 @@ public class ImageDansJScrollGauche extends JFrame {
 
 			labe.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					// permet de dire sur quelle image nous cliquons et permet
-					// de centrer la vision de la map sur
-					// la position de la photo sur laquelle nous cliquons
+					// Permet de récupérer l'image qu'on vient de sélectionner
+					// et
+					// centre la carte sur sa position
 
 					/* int indice = (((JLabelModif) e.getSource()).ind); */
 
@@ -74,6 +73,8 @@ public class ImageDansJScrollGauche extends JFrame {
 					 * Infopoids = new JLabel("Poids :"+df.format(poids)+" Mo");
 					 */
 
+					// Création d'une Jlabel qui affichera les infos de l'image
+					// cliquée
 					JLabel Info = new JLabel();
 					Info.setText("<html>Latitude : " + imagList.get(indice).Latitude + "<br>" + "Longitude : "
 							+ imagList.get(indice).Longitude + "<br>" + "Nom : " + imagList.get(indice).nom + "<br>"
@@ -94,6 +95,7 @@ public class ImageDansJScrollGauche extends JFrame {
 
 			});
 
+			// Changement de la taille de l'image
 			ImageIcon imag = new ImageIcon(Path);
 			Image imag2 = imag.getImage();
 			Image nouvelle_image = imag2.getScaledInstance(270, 200, java.awt.Image.SCALE_SMOOTH);
@@ -101,11 +103,11 @@ public class ImageDansJScrollGauche extends JFrame {
 			imag = new ImageIcon(nouvelle_image);
 			labe.setIcon(imag);
 
-			panel1.add(labe, c);
+			panel1.add(labe, c);// Ajout au label
 
 		}
 
-		// cr�ation du JScrollPane
+		// création du JScrollPane
 		JScrollPane panel_scroll_l = new JScrollPane(panel1);
 
 		panel_scroll_l.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);

@@ -4,15 +4,15 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Image {
-
-	public File file;
+	File file;
 	public float Latitude;
 	public float Longitude;
 	public long taille;
 	public ArrayList<String> commentaire;
 	public String nom;
 
-	public Image(File f, float lat, float lon) {
+	public Image(File f, float lat, float lon) { // instanciation des données
+													// importantes de l'Image
 		this.file = f;
 		this.Latitude = lat;
 		this.Longitude = lon;

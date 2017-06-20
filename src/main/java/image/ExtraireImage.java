@@ -8,7 +8,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collection;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import org.apache.commons.io.IOUtils;
 
@@ -18,8 +23,19 @@ import com.drew.metadata.Metadata;
 import com.drew.metadata.exif.GpsDescriptor;
 import com.drew.metadata.exif.GpsDirectory;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 public class ExtraireImage {
 
+	private static JChooserPreviewPanel previewchooser = new JChooserPreviewPanel();
+
+	// Méthode qui permet de récupérer le fichier, avec un gestionnaire de
+	// fichier (recherche,parcourir,..)
+	// Et récupère l'image
 	public static Image LoadImage() throws IOException {
 		File repertoire = null;
 		try {
@@ -30,6 +46,8 @@ public class ExtraireImage {
 		}
 
 		JFileChooser dial = new JFileChooser(repertoire);
+		dial.setAccessory(previewchooser); // Ajout du JFileChooser preview +
+		dial.addPropertyChangeListener(pcl); // Ecouteur de changements de choix
 		dial.showOpenDialog(null);
 
 		System.out.println("Fichier choisi :" + dial.getSelectedFile());
@@ -40,6 +58,7 @@ public class ExtraireImage {
 		try {
 			image = new Image(f, getLatittude(f), getLongitude(f));
 		} catch (java.lang.ArrayIndexOutOfBoundsException e) {
+			// Si l'image n'a pas de coordonnées, on l'initialise à 0,0
 			image = new Image(f, 0, 0);
 		}
 		InputStream inp = new FileInputStream(f);
@@ -81,6 +100,30 @@ public class ExtraireImage {
 
 	}
 
+	static PropertyChangeListener pcl = new PropertyChangeListener() {
+		public void propertyChange(PropertyChangeEvent e) {
+			if (e.getPropertyName().equals(JFileChooser.SELECTED_FILE_CHANGED_PROPERTY)) {
+				File f = (File) e.getNewValue();
+				if (f != null) {
+					if (f.isFile()) {
+						String s = f.getPath(), suffix = null;
+						int i = s.lastIndexOf('.');
+
+						if (i > 0 && i < s.length() - 1) {
+							suffix = s.substring(i + 1).toLowerCase();
+
+							if (suffix.equals("gif") || suffix.equals("png") || suffix.equals("jpg")) {
+								previewchooser.getImagePreviewer().configure(f);
+							}
+						}
+					}
+				}
+
+			}
+		}
+	};
+
+	// Méthode qui récupère la Latitude et la convertie en degrées
 	public static float getLatittude(File f) {
 		String lat = "";
 		try {
@@ -96,7 +139,7 @@ public class ExtraireImage {
 			System.out.println("Attention Erreur");
 		} catch (IOException e) {
 			System.out.println("Attention votre image n'a pas de coordonnées GPS");
-		}catch (java.lang.ClassCastException e){
+		} catch (java.lang.ClassCastException e) {
 			System.out.println("Attention Erreur 3");
 		}
 		// conversion//
@@ -116,6 +159,7 @@ public class ExtraireImage {
 		return val;
 	}
 
+	// Méthode qui récupère la Longitude et la convertie en degrées
 	public static float getLongitude(File f) {
 		String lon = "";
 		try {

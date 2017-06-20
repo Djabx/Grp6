@@ -12,6 +12,8 @@ public class ManageImage {
 
 	public ArrayList<Image> imagList;
 
+	// Parcours le dossier et initialise la liste d'image avec celles présentes
+	// dans le dossier
 	public ManageImage() {
 		this.imagList = new ArrayList<Image>();
 		File dossier;
@@ -31,20 +33,22 @@ public class ManageImage {
 			e.printStackTrace();
 		}
 	}
-	public static void BaseDonneeFermee(ArrayList<Image> ListImage){
+
+	// Vérifie que l'utilisateur n'ajoute pas d'image quand le logiciel se ferme
+	public static void BaseDonneeFermee(ArrayList<Image> ListImage) {
 		File dos;
 		try {
 			dos = new File("Dossier Image").getCanonicalFile();
 			String[] list = dos.list();
-			for(int i=0; i < list.length; i++){
-				File f = new File(DIR_FILE,list[i]).getCanonicalFile();
-				Image image = new Image(f, ExtraireImage.getLatittude(f),ExtraireImage.getLongitude(f));
-				if(!(ListImage.contains(image))){
+			for (int i = 0; i < list.length; i++) {
+				File f = new File(DIR_FILE, list[i]).getCanonicalFile();
+				Image image = new Image(f, ExtraireImage.getLatittude(f), ExtraireImage.getLongitude(f));
+				if (!(ListImage.contains(image))) {
 					f.delete();
 				}
 			}
-		}catch (IOException e){
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-}
+	}
 }
