@@ -28,39 +28,27 @@ public class ClickSouris extends JComponent implements MouseListener {
 
 	public void mouseClicked(MouseEvent clic) {
 
-		Point _positionSouris = notrecarte.getMap().getMousePosition(); // Récupère
-																		// les
-																		// coordonnees
-																		// du
-																		// clic
+		// Récupère les coordonnees du clic
+		Point _positionSouris = notrecarte.getMap().getMousePosition(); 
 
-		WaypointAutourDuClic.Check(this.notrecarte, _positionSouris, this.WaypointClicResultat); // Check
-																									// des
-																									// waypoints
-																									// autour
-																									// du
-																									// clic
-
+		// Check des waypoints autour du clic
+		WaypointAutourDuClic.Check(this.notrecarte, _positionSouris, this.WaypointClicResultat); 
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-
 	}
 
 }

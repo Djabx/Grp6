@@ -63,14 +63,8 @@ public class Projet extends JFrame implements ActionListener {
 		setTitle("Notre Projet");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		notre_carte.getMap().getMainMap().addMouseListener(new MouseAdapter() {// Mise
-																				// à
-																				// jour
-																				// du
-																				// panel
-																				// preview
-																				// au
-																				// click
+		// Mise à jour du panel preview au click
+		notre_carte.getMap().getMainMap().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				remove(preview);
 				preview = ImageDansJPanel.method(notre_carte);

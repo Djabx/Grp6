@@ -18,7 +18,7 @@ public class ManageImage {
 		this.imagList = new ArrayList<Image>();
 		File dossier;
 		try {
-			dossier = new File("Dossier Image").getCanonicalFile();
+			dossier = new File(DIR_NAME).getCanonicalFile();
 			String[] liste = dossier.list();
 			for (int i = 0; i < liste.length; i++) {
 				if (liste[i].endsWith(".jpg") || liste[i].endsWith(".gif") || liste[i].endsWith(".png")) {
@@ -38,7 +38,7 @@ public class ManageImage {
 	public static void BaseDonneeFermee(ArrayList<Image> ListImage) {
 		File dos;
 		try {
-			dos = new File("Dossier Image").getCanonicalFile();
+			dos = new File(DIR_NAME).getCanonicalFile();
 			String[] list = dos.list();
 			for (int i = 0; i < list.length; i++) {
 				File f = new File(DIR_FILE, list[i]).getCanonicalFile();
