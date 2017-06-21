@@ -159,7 +159,13 @@ public class ExtraireImage {
 		return val;
 	}
 
-	// Méthode qui récupère la Longitude et la convertie en degrées
+	/**
+	 * Lis un fichier image, et récuppère la métadonnée Longitude
+	 * 
+	 * @param f
+	 *            le fichier à lire
+	 * @return la longitude en float
+	 */
 	public static float getLongitude(File f) {
 		String lon = "";
 		try {
