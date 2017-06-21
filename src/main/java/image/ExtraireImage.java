@@ -19,6 +19,7 @@ import org.apache.commons.io.IOUtils;
 
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
+import com.drew.lang.GeoLocation;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.exif.GpsDescriptor;
 import com.drew.metadata.exif.GpsDirectory;
@@ -125,15 +126,13 @@ public class ExtraireImage {
 
 	// Méthode qui récupère la Latitude et la convertie en degrées
 	public static float getLatittude(File f) {
-		String lat = "";
 		try {
 			Metadata data = ImageMetadataReader.readMetadata(f);
 			if (data.containsDirectoryOfType(GpsDirectory.class)) {
 				Collection<GpsDirectory> GpsDir = data.getDirectoriesOfType(GpsDirectory.class);
-				for (GpsDirectory gpsDirectory : GpsDir) {
-					GpsDescriptor gpsDescript = new GpsDescriptor(gpsDirectory);
-					lat = lat + gpsDescript.getGpsLatitudeDescription();
-				}
+					for (GpsDirectory gpsDirectory : GpsDir) {
+						return (float) gpsDirectory.getGeoLocation().getLatitude();
+					}
 			}
 		} catch (ImageProcessingException e) {
 			System.out.println("Attention Erreur");
@@ -142,21 +141,7 @@ public class ExtraireImage {
 		} catch (java.lang.ClassCastException e) {
 			System.out.println("Attention Erreur 3");
 		}
-		// conversion//
-		lat = lat.replace(",", ".");
-
-		String[] tableau = lat.split("°");
-		tableau[1] = tableau[1].substring(1, tableau[1].length());
-
-		String[] tableau2 = tableau[1].split("'");
-		tableau2[1] = tableau2[1].substring(1, tableau2[1].length() - 1);
-
-		float deg = Float.parseFloat(tableau[0]);
-		float min = Float.parseFloat(tableau2[0]);
-		float sec = Float.parseFloat(tableau2[1]);
-
-		float val = deg + min / 60 + sec / 3600;
-		return val;
+		return (float) 0.0;
 	}
 
 	/**
@@ -167,14 +152,12 @@ public class ExtraireImage {
 	 * @return la longitude en float
 	 */
 	public static float getLongitude(File f) {
-		String lon = "";
 		try {
 			Metadata data = ImageMetadataReader.readMetadata(f);
 			if (data.containsDirectoryOfType(GpsDirectory.class)) {
 				Collection<GpsDirectory> GpsDir = data.getDirectoriesOfType(GpsDirectory.class);
 				for (GpsDirectory gpsDirectory : GpsDir) {
-					GpsDescriptor gpsDescript = new GpsDescriptor(gpsDirectory);
-					lon = lon + gpsDescript.getGpsLongitudeDescription();
+					return (float) gpsDirectory.getGeoLocation().getLongitude();
 				}
 			}
 		} catch (ImageProcessingException e) {
@@ -182,21 +165,7 @@ public class ExtraireImage {
 		} catch (IOException e) {
 			System.out.println("Attention votre image n'as pas de coordonnées GPS");
 		}
-		// conversion//
-		lon = lon.replace(",", ".");
-
-		String[] tableau = lon.split("°");
-		tableau[1] = tableau[1].substring(1, tableau[1].length());
-
-		String[] tableau2 = tableau[1].split("'");
-		tableau2[1] = tableau2[1].substring(1, tableau2[1].length() - 1);
-
-		float deg = Float.parseFloat(tableau[0]);
-		float min = Float.parseFloat(tableau2[0]);
-		float sec = Float.parseFloat(tableau2[1]);
-
-		float val = deg + min / 60 + sec / 3600;
-		return val;
+		return (float) 0.0;
 	}
-
+	
 }
